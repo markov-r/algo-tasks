@@ -42,11 +42,50 @@ public class Main {
         writer.close();
     }
 
-
-
-
-
-
+// RECURSIVE SOLUTION
+//
+// public static int[] arr;
+// public static int n;
+// public static boolean[] visited;
+//
+// public static void main(String[] args) {
+//     InputReader reader = new InputReader();
+//     OutputWriter writer = new OutputWriter();
+//     String numbers[] = reader.readLine().split(", ");
+//     n = numbers.length;
+//     arr = new int[n];
+//
+//     for (int i = 0; i < n; i++) {
+//         arr[i] = Integer.parseInt(numbers[i]);
+//     }
+//
+//     int maxJumps = 0;
+//     for (int startPos = 0; startPos < n; startPos++) {
+//         for (int step = 1; step < n; step++) {
+//             visited = new boolean [n];
+//             visited[startPos] = true;
+//             int jumps = 1;
+//             jumps = CheckJumps(startPos, step, jumps);
+//             if (jumps > maxJumps) {
+//                 maxJumps = jumps;
+//             }
+//         }
+//     }
+//     writer.printLine(maxJumps);
+//     writer.close();
+// }
+//
+// public static int CheckJumps(int startPos, int step, int jumps) {
+//
+//     int currInd = (startPos + step) % n;
+//     if (arr[currInd] > arr[startPos] && !visited[currInd]) {
+//         jumps ++;
+//         visited[currInd] = true;
+//         return CheckJumps(currInd, step, jumps);
+//         } else {
+//           return jumps;
+//         }
+//     }
 
      static class InputReader {
         private InputStream stream;
