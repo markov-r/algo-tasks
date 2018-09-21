@@ -1,2 +1,2 @@
 # algo-tasks
-Algorithmic Tasks from LeetCode, Telerik Judge and HackerRank
+Various algorithmic Tasks from LeetCode, Telerik Judge and HackerRank
