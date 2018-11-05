@@ -12,6 +12,11 @@ public class Main {
         int[] prices = {3, 3, 5, 0, 0, 3, 1, 4};
         System.out.println(maxProfit(prices));
     }
+    /** This should be the standard "straightforward" DP solution:
+    - create top-down DP array to store max profit per day from start to end
+    - create bottom-up DP array to store the max profit from end to start
+    - traverse both and find the max possible sum */
+
     private static int maxProfit(int[] prices) {
         if (prices.length == 0) return 0;
         int n = prices.length;
