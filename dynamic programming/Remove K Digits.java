@@ -22,8 +22,7 @@ public class Main {
      Constructing the result is done digit by digit each time appending at the end of a StringBuilder.
      - First k elements result in "0", then find the smallest digit in the first (k+1) and note down its index.
      - Continue finding the smallest for the current substring right of the previous smallest.
-     - Delete leading zeroes if present. 
-     *Also has a greedy solution using Stack*/
+     - Delete leading zeroes if present. */
 
     private static String removeKdigits(String num, int k) {
         if (num.length() == k || num.equals("")) return "0";
@@ -50,5 +49,29 @@ public class Main {
             }
         }
         return minIdx;
+    }
+    
+    private static String removeKDigitsStack(String num, int k) {
+        if (k == num.length()) return "0";
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < num.length(); i++) {
+            while (k > 0 && !stack.isEmpty() &&         //when a digit less than the previous is found, remove the previous
+                    stack.peek() > num.charAt(i)) {
+                stack.pop();
+                k--;
+            }
+            stack.push(num.charAt(i));
+        }
+        while (k > 0) {                                 //cases "1111" or "1234" or similar
+            stack.pop();
+            k--;
+        }
+        StringBuilder sb = new StringBuilder();         //reverse stack into string builder
+        while (!stack.isEmpty())
+            sb.append(stack.pop());
+        sb.reverse();
+        while (sb.length() > 1 && sb.charAt(0) == '0')  //remove leading 0's if present
+            sb.deleteCharAt(0);
+        return sb.toString();
     }
 }
