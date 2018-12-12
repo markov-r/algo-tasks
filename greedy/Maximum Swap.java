@@ -48,4 +48,35 @@ public class Main {
         maxNum[left] = prevMax;
         return Integer.parseInt(new String(maxNum));
     }
+
+    /* Same as above with 3 loops */    
+        public int maximumSwap(int num) {
+        char[] maxNum = ("" + num).toCharArray();
+        int first = -1;                                     //find an increasing sequence of digits
+        for (int i = 0; i < maxNum.length - 1; i++) {
+            if (maxNum[i] < maxNum[i+1]) {
+                first = i;
+                break;
+            }
+        }
+        if (first == -1) return num;                             // if all decreasing - 321 322
+        int maxIdx = first + 1;                                            //biggest digit right of first increasing seq (above)
+        for (int i = first + 2; i < maxNum.length; i++) {
+            if (maxNum[i] >= maxNum[maxIdx]) {              // find the last max! (e.g. in 27367 swap indices 0 and 4, not 0 and 1)
+                maxIdx = i;
+            }
+        }
+        int second = -1;                                        // find the first digit smaller than max
+        for (int i = 0; i <= maxIdx - 1; i++) {
+            if (maxNum[i] < maxNum[maxIdx]) {
+                second = i;
+                break;
+            }
+        }
+        char prevMax = maxNum[maxIdx];                        //swap max with second
+        maxNum[maxIdx] = maxNum[second];
+        maxNum[second] = prevMax;
+        return Integer.parseInt(new String(maxNum));
+    }
+
 }
