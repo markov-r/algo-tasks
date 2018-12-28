@@ -42,7 +42,7 @@ public class Main {
                 bestInd = i;
             }
         }
-        System.out.println("The max lenght is " + maxLen);
+        System.out.println("The max length is " + maxLen);
 
         List<Integer> finalSequence = new ArrayList<>();
         while (bestInd != -1) {
