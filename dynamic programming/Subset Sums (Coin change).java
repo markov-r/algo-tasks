@@ -1,43 +1,59 @@
-import java.io.*;
-import java.util.*;
-
 public class Main {
 
-    private static void fakeInput() {
-        String test = "14\n" +
-                "2 1 2 4 3 5 2 6";
-        System.setIn(new ByteArrayInputStream(test.getBytes()));
+    /** Find if in a given array of non-negative numbers a given sum can be made
+     * as a sum of any number of the array elements.
+     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+     * Fill row by row, first with an empty array you can make only zero sum.
+     * Then for every next row the sums that you can make are the old ones,
+     * plus all of the old ones plus the newly added arr. element. */
+
+    private static boolean subSetDP(int[] nums, int sum) {
+        boolean[][] dp = new boolean[nums.length + 1][sum + 1];
+        // if sum is not zero and subset is 0, we can't make it
+        for (int i = 1; i <= sum; i++)   dp[0][i] = false;
+
+        // if sum is 0 empty subset makes that sum
+        for (int i = 0; i <= nums.length; i++)  dp[i][0] = true;
+
+        for (int i = 1; i <= nums.length; i++){
+            for(int j = 1; j <= sum; j++){
+                //first copy data from top (prev solutions are solutions to current sub-problem)
+                dp[i][j] = dp[i-1][j];
+                //If previously was false, check if the sum can be made with new element
+                if (!dp[i][j] && j >= nums[i-1])
+                    dp[i][j] = dp[i-1][j-nums[i-1]];
+            }
+        }
+        return dp[nums.length][sum];
     }
 
-    //  Working for positive integers only, needs small modification for negatives
-    public static void main(String[] args) throws IOException {
-        fakeInput();
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        int checkSum = Integer.parseInt(in.readLine());
-        String[] inputStr = in.readLine().split(" ");
-        int n = inputStr.length;
-        int[] nums = new int[n];
-        int sumAll = 0;
-        for (int i = 0; i < n; i++) {
-            nums[i] = Integer.parseInt(inputStr[i]);
-            sumAll += nums[i];
-        }
-        if (checkSum > sumAll) {
-            System.out.println("no");
-            return;
-        }
+    /** Memory optimized -> use only prev and current arr[sum+1],
+     * not a full matrix, as only the previous row is used. */
 
-        boolean[] possible = new boolean[sumAll + 1];
-        for (int i = 0; i < n; i++) {
-            Set<Integer> numsToAdd = new HashSet<>();
-            for (int j = 0; j < sumAll + 1; j++) {
-                if (possible[j]) numsToAdd.add(j + nums[i]);
+    private static boolean subSetDPOptimized(int[] nums, int sum) {
+        boolean[] prev = new boolean[sum+1];
+        // if sum is not zero and subset is 0, we can't make it
+        prev[0] = true;
+        for (int i = 1; i < prev.length; i++)   prev[i] = false;
+
+        boolean[] curr = new boolean[sum + 1];
+        for (int num : nums) {
+            curr = new boolean[sum + 1];
+            for (int j = 0; j <= sum; j++) {
+                if (prev[j]) {          //copy from top
+                    curr[j] = true;
+                    if (j + num <= sum) //also if new elem. + old sum fits in arr. -> add it as well
+                        curr[j+num] = true;
+                }
             }
-            possible[nums[i]] = true;
-            for (int num : numsToAdd) {
-                possible[num] = true;
-            }
+            prev = curr.clone(); //curr is the new prev
         }
-        System.out.println(possible[checkSum] ? "yes" : "no");
+        return curr[sum];
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {2, 3, 1, 4, 2}; int sum = 7;
+//         System.out.println((subSetDP(nums, sum))); 
+        System.out.println((subSetDPOptimized(nums, sum)));
     }
 }
