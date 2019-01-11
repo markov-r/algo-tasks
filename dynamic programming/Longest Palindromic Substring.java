@@ -9,7 +9,8 @@ public class Main {
     }
 
     /** A new string is a palindrome if the new letter equals the first
-     *  and the middle part is also a palindrome.
+     *  and the middle part (already calculated) is also a palindrome.
+     *  Calculation is done diagonally, starting with main diagonal.
      *  First calculate the max palindrome count,
      *  then using the count traverse dp[][] to find
      *  a palindrome string with such length. */
