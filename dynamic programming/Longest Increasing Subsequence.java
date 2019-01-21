@@ -52,6 +52,10 @@ public class Main {
         else return right;
     }
 
+     /** Make a DP array keeping the best solution up till current index, ending on that index.
+     * For the new index check for all previous indices if the element is bigger and if it is, 
+     * check how long the new length can become, and keep the longest. */
+    
     public int standardDP(int[] seq) {
         if (seq.length == 0) return 0;
         int len[] = new int[seq.length];    //longest length up till current index
