@@ -13,56 +13,23 @@ public class Main {
     }
 
     private static ListNode reverseList(ListNode head) {
-        if (head == null || head.next == null) {
-            return head;
+        if (head == null || head.next == null) return head;
+        if (head.next.next == null) { ListNode second = head.next; head.next.next = head; head.next = null; return second; }  //reverse links
+
+        ListNode left = head;
+        ListNode right = head.next;
+        head.next = null;               //remove first link
+
+        while (right.next != null) {
+            ListNode third = right.next;
+            right.next = left;
+            left = right;
+            right = third;
         }
-        Stack<ListNode> stack = new Stack<>();
-//        Stack<Integer> stack = new Stack<>();
-//        stack.push(head.val);
-        stack.push(head);
-        while (head.next != null) {                           // rotate pointer to last element
-//            stack.push(new ListNode(head.val));
-            head = head.next;
-//            stack.push(head.val);
-            stack.push(head);
-        }
-        ListNode resultFilling = new ListNode(-1234567);
-        ListNode result = resultFilling;
-        while (!stack.isEmpty()) {
-//            resultFilling.next = new ListNode(stack.pop());
-            resultFilling.next = new ListNode(stack.pop().val);
-            resultFilling = resultFilling.next;
-        }
-        return result.next;
+        right.next = left;
+        return right;
     }
-
-//    NOT WORKING RECURSIVE SOLUTION
-//
-//    private static ListNode reverseList(ListNode head) {
-//        if (head == null || head.next == null) {
-//            return head;
-//        }
-//        ListNode initial = head;
-//        ListNode result = new ListNode(-123);
-//        return reverseExtended(head, initial, result);
-//    }
-//
-//    private static ListNode reverseExtended(ListNode head, ListNode initial, ListNode result) {
-//        boolean listIsEmpty = true;
-//        ListNode prev = new ListNode(-354);
-//        while (head.next != null) {                           // rotate pointer to last element
-//            prev = head;
-//            head = head.next;
-//            listIsEmpty = false;
-//        }
-//        if (listIsEmpty) {
-//            return result.next;
-//        }
-//        result.next = new ListNode(head.val);
-//        prev.next = null;
-//        return reverseExtended(initial, initial, result);
-//    }
-
+    
     private static void printList(ListNode x) {
         while (x != null) {
             System.out.print(x.val + " ");
