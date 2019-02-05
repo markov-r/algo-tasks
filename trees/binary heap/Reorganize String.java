@@ -25,8 +25,8 @@ public class Main {
      *  Check if most frequent char is not too frequent - e.g. "aaab" is NOT OK, "aab" is OK
      *  Add all characters and their count in a binary heap (Priority Queue)
      *  Then start popping the items with max count from the top of the heap
-     *  and when there is no duplication of consecutive characters add them
-     *  to the resulting string */
+     *  and when there are no two equal consecutive characters 
+     *  add them to the resulting string */
 
     private static String reorganizeString(String str) {
         if (str.equals("")) return "";
