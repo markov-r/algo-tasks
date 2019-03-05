@@ -17,10 +17,10 @@ public class Main {
         double[][] mat = new double[input.length() + 1][output.length() + 1];
         mat[0][0] = 0;
         for (int i = 1; i < output.length() + 1; i++) {
-            double nextMember = mat[0][i - 1] + getInsertCost(output.charAt(i - 1));
+            double nextMember = mat[0][i - 1] + getInsertCost(output.charAt(i - 1));    //from "" to output only by inserting a char
             mat[0][i] = (double) Math.round(nextMember * 10d) / 10d;
         }
-        for (int i = 1; i < input.length() + 1; i++) {
+        for (int i = 1; i < input.length() + 1; i++) {              //from input to "" only by deleting a char
             double nextMember = mat[i - 1][0] + getDeletionCost(input.charAt(i - 1));
             mat[i][0] = (double) Math.round(nextMember * 10d) / 10d;
         }
