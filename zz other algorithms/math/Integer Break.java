@@ -11,6 +11,8 @@ public class Main {
         System.out.println(integerBreak(58)); //59+ overflows
     }
 
+    /** We keep breaking n into 3's until n gets smaller than 10, then solve the problem by brute-force.*/
+    
     private static int integerBreak(int n) {
         if (n < 4) return n - 1;
         int threes = n / 3;
