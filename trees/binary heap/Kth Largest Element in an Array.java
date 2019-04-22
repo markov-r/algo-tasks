@@ -41,14 +41,14 @@ public class Main {
     public static class MinHeapComparator implements Comparator<Integer> {
         @Override
         public int compare(Integer i1, Integer i2) {
-            return Integer.compare(i1, i2);         // => min heap
+            return Integer.compare(i1, i2);         // => min heap, root is smallest
         }
     }
 
     public static class MaxHeapComparator implements Comparator<Integer> {
         @Override
         public int compare(Integer i1, Integer i2) {
-            return Integer.compare(i2, i1);         // => max heap
+            return Integer.compare(i2, i1);         // => max heap, root is biggest
         }
     }
 }
