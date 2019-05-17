@@ -30,7 +30,7 @@ public class Main {
 
 
 
-//// OLD SOLUTION -> HAS REPETETIVE COMBINATIONS
+//// OLD SOLUTION -> HAS REPETITIVE COMBINATIONS
 //
 //import java.io.*;
 //import java.util.*;
