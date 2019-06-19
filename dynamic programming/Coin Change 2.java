@@ -11,7 +11,7 @@ public class Main {
 
     /** Simpler 1D array version
      *  Each time a new coin is introduced via the outer loop,
-     *  so each row shows num of solutions for all previous coins plus the current.
+     *  the current row shows num of solutions for all previous coins plus the current.
      *  - In the case of 2D array all solutions from previous (above) line
      *  are also solutions for the current line, so overwriting is acceptable.
      *  It also saves us from otherwise copying old solutions to the new row. */
