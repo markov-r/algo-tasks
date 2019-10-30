@@ -9,9 +9,12 @@ class Solution {
                 .twoSumTwoPointers(new int[]{2,7,11,15},9)));
 //                .twoSumTwoPointers(new int[]{},9))); //NOT VALID, SOLUTION SHOULD EXIST
     }
-
-    
-
+   
+    /**
+     * Start with first and last element and if the sum of them
+     * is larger than target, move right pointer to the left to maket it smaller.
+     * If the sum is smaller than target move the left pointer right to make it bigger.
+     */
     public int[] twoSumTwoPointers(int[] nums, int sum) {
         int first = 0;
         int second = nums.length - 1;
@@ -25,7 +28,6 @@ class Solution {
         }
         return new int[]{first+1, second+1};
     }
-
 
     /**
      * Trivial solution - for each number in the array do a binary search
